@@ -5,8 +5,8 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
-import { ConfigService } from '@nestjs/config';
 import { expressJwtSecret } from 'jwks-rsa';
+import { ConfigService } from '@nestjs/config';
 import { promisify } from 'node:util';
 import jwt from 'express-jwt';
 
@@ -37,7 +37,6 @@ export class AuthorizationGuard implements CanActivate {
     );
     try {
       await verifyJWT(req, res);
-
       return true;
     } catch (err) {
       throw new UnauthorizedException(err);
