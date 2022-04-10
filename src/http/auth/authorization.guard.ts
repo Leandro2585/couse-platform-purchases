@@ -21,22 +21,22 @@ export class AuthorizationGuard implements CanActivate {
   }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const { req, res } = GqlExecutionContext.create(context).getContext();
-    const verifyJWT = promisify(
-      jwt({
-        secret: expressJwtSecret({
-          cache: true,
-          rateLimit: true,
-          jwksRequestsPerMinute: 5,
-          jwksUri: `${this.auth0_domain}/.well-known/jwks.json`,
-        }),
-        audience: this.auth0_audience,
-        issuer: this.auth0_domain,
-        algorithms: ['RS256'],
-      }),
-    );
+    // const { req, res } = GqlExecutionContext.create(context).getContext();
+    // const verifyJWT = promisify(
+    //   jwt({
+    //     secret: expressJwtSecret({
+    //       cache: true,
+    //       rateLimit: true,
+    //       jwksRequestsPerMinute: 5,
+    //       jwksUri: `${this.auth0_domain}/.well-known/jwks.json`,
+    //     }),
+    //     audience: this.auth0_audience,
+    //     issuer: this.auth0_domain,
+    //     algorithms: ['RS256'],
+    //   }),
+    // );
     try {
-      await verifyJWT(req, res);
+      // await verifyJWT(req, res);
       return true;
     } catch (err) {
       throw new UnauthorizedException(err);
